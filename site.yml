@@ -1,0 +1,19 @@
+# site.yml
+- name: Provision Ubuntu machines
+  hosts: all
+  become: true
+  # hosts: localhost
+  # become: true
+  roles:
+    - gdm
+    - docker
+    - mounts
+    - rustdesk
+    - packages
+    - systemd
+    - scripts
+  tasks:
+    - name: Ensure apt cache is up to date
+      apt:
+        cache_valid_time: 3600
+        update_cache: yes

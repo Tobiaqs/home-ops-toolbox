@@ -1,0 +1,6 @@
+- name: Install Syncthing and WireGuard
+  apt:
+    name:
+      - syncthing
+      - wireguard
+    state: latest

@@ -1,0 +1,11 @@
+- name: Install unlock-madd script
+  copy:
+    src: unlock-madd.sh
+    dest: "/usr/local/sbin/unlock-madd.sh"
+    mode: '0755'
+
+- name: Install unlock-disks script
+  template:
+    src: unlock-disks.sh.j2
+    dest: "/usr/local/sbin/unlock-disks.sh"
+    mode: '0755'

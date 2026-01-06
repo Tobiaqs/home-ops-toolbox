@@ -1,0 +1,6 @@
+# roles/gdm/tasks/main.yml
+- name: Disable Wayland explicitly
+  lineinfile:
+    path: /etc/gdm3/custom.conf
+    regexp: '^#?WaylandEnable='
+    line: 'WaylandEnable=false'

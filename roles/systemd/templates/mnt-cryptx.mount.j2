@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount {{ item.name }}
+After=unlock-{{ item.name }}.service
+Requires=unlock-{{ item.name }}.service
+
+[Mount]
+What=/dev/mapper/luks-{{ item.uuid }}
+Where=/mnt/{{ item.name }}
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target

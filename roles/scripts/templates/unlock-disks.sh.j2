@@ -1,0 +1,9 @@
+#!/bin/bash
+
+{% for volume in volumes %}
+systemctl start unlock-{{ volume.name }}
+systemctl start mnt-{{ volume.name }}.mount
+{% endfor %}
+
+systemctl start docker docker.socket
+systemctl start syncthing-crypt@me

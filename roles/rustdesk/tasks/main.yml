@@ -1,0 +1,19 @@
+- name: Download latest RustDesk
+  delegate_to: localhost
+  community.general.github_release:
+    user: rustdesk
+    repo: rustdesk
+    action: latest_release
+  register: rustdesk_pkg
+
+- name: Download RustDesk .deb package
+  get_url:
+    url: "https://github.com/rustdesk/rustdesk/releases/download/{{ rustdesk_pkg.tag }}/rustdesk-{{ rustdesk_pkg.tag }}-x86_64.deb"
+    dest: "/tmp/rustdesk-latest.deb"
+    mode: '0644'
+  register: download_rustdesk
+
+- name: DPKG install RustDesk
+  apt:
+    deb: "/tmp/rustdesk-latest.deb"
+  when: download_rustdesk.changed

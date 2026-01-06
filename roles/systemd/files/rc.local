@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/usr/local/sbin/unlock-disks.sh &
+
+exit 0

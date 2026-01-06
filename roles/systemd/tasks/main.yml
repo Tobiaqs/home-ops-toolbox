@@ -1,0 +1,43 @@
+- name: Create systemd service for each volume
+  template:
+    src: unlock-cryptx.service.j2
+    dest: "/etc/systemd/system/unlock-{{ item.name }}.service"
+    mode: '0644'
+  loop: "{{ volumes }}"
+  notify: systemd reload
+
+- name: Create systemd mounts for each volume
+  template:
+    src: mnt-cryptx.mount.j2
+    dest: "/etc/systemd/system/mnt-{{ item.name }}.mount"
+    mode: '0644'
+  loop: "{{ volumes }}"
+  notify: systemd reload
+
+- name: Install rc.local
+  copy:
+    src: rc.local
+    dest: /etc/rc.local
+    mode: '0755'
+
+- name: Install rc-local.service
+  copy:
+    src: rc-local.service
+    dest: /etc/systemd/system/rc-local.service
+    mode: '0644'
+  notify: systemd reload
+
+- name: Install syncthing-crypt@.service
+  copy:
+    src: syncthing-crypt@.service
+    dest: /etc/systemd/system/syncthing-crypt@.service
+    mode: '0644'
+  notify: systemd reload
+
+- name: Disable docker and docker.socket
+  systemd:
+    name: "{{ item }}"
+    enabled: false
+  loop:
+    - docker
+    - docker.socket

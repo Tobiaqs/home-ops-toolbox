@@ -1,0 +1,12 @@
+[Unit]
+Description=Unlock LUKS volume {{ item.name }}
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/unlock-madd.sh {{ item.uuid }} {{ item.maddkey }}
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

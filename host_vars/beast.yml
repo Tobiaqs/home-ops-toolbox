@@ -1,0 +1,4 @@
+volumes:
+  - name: cryptone
+    uuid: 5fb8102d-6c30-4e85-90b9-5d48a52d5712
+    maddkey: /home/me/.ssh/maddkey_whimsical-march-stipend

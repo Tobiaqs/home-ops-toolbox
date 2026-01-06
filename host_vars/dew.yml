@@ -1,0 +1,7 @@
+volumes:
+  - name: cryptone
+    uuid: 5eb63a96-3839-4e02-a24c-4e622b6c7138
+    maddkey: /home/me/.ssh/maddkey_april-outmatch-seclusion
+  - name: crypttwo
+    uuid: 7cd95e59-3a94-40b7-9698-9bd700d871c1
+    maddkey: /home/me/.ssh/maddkey_outbound-eccentric-quickly
