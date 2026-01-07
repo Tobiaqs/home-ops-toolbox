@@ -1,9 +1,6 @@
-# site.yml
 - name: Provision Ubuntu machines
   hosts: all
   become: true
-  # hosts: localhost
-  # become: true
   roles:
     - apt
     - gdm
@@ -12,3 +9,4 @@
     - rustdesk
     - systemd
     - scripts
+    - samba

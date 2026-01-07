@@ -1,0 +1,35 @@
+- name: Install packages
+  apt:
+    name:
+      - samba
+    state: latest
+
+- name: Disable samba service
+  systemd:
+    name: smbd
+    enabled: no
+    state: stopped
+
+- name: Disable nmbd service
+  systemd:
+    name: nmbd
+    enabled: no
+    state: stopped
+
+- name: Set Samba password for smb
+  command:
+    cmd: /usr/bin/smbpasswd -s -a me
+    stdin: |
+      {{ smbuser_password }}
+      {{ smbuser_password }}
+  vars:
+    smbuser_password: "{{ samba_password }}"
+  no_log: true
+
+- name: Install smb.conf
+  template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: '0644'

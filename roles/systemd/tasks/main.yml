@@ -34,6 +34,13 @@
     mode: '0644'
   notify: systemd reload
 
+- name: Install smbd-crypt.service
+  copy:
+    src: smbd-crypt.service
+    dest: /etc/systemd/system/smbd-crypt.service
+    mode: '0644'
+  notify: systemd reload
+
 - name: Disable docker and docker.socket
   systemd:
     name: "{{ item }}"

@@ -1,0 +1,22 @@
+[global]
+    workgroup = WORKGROUP
+    server string = {{ansible_hostname}} Samba
+    security = user
+    map to guest = never
+    min protocol = SMB3
+    smb encrypt = disabled
+
+{% for volume in volumes %}
+{% if volume.samba %}
+[{{ volume.name }}]
+    path = /mnt/{{ volume.name }}
+    valid users = me
+    read only = no
+    browsable = yes
+    force user = me
+    force group = me
+    create mask = 0660
+    directory mask = 0770
+
+{% endif %}
+{% endfor %}
